@@ -1,0 +1,46 @@
+cd "C:\Users\Surya\OneDrive\Desktop"
+python ai_firewall_live.py
+
+
+
+               Data Preparation & Model Training:
+
+Loaded a dataset (dataset_demo.csv) containing network packet features and labels (malicious or normal).
+
+Converted categorical features (like IPs or flags) into numerical values using LabelEncoder.
+
+Split the data into training and testing sets.
+
+Trained a Random Forest classifier to predict whether a network packet is malicious or normal.
+
+Saved the trained model and encoders for later use.
+
+                Define Malicious Reasons:
+
+Created a list of possible malicious traffic reasons such as "Port Scan", "Flood Attack", etc., to provide context when a packet is flagged.
+
+           Packet Processing Function (process_packet):
+
+Extracts important packet details: source/destination IPs, ports, protocol, size, and flags.
+
+Converts any categorical features into numbers using the saved encoders.
+
+Feeds the packet data into the trained model to predict if it’s normal or malicious.
+
+If malicious, prints a blocked message with a reason; otherwise, prints a normal allowed message.
+
+               Live Monitoring:
+
+Captures real-time network packets from a specified interface (Wi-Fi).
+
+Uses a loop to analyze each packet continuously using process_packet.
+
+Runs until the user stops it (Ctrl+C).
+
+                 Output:
+
+Provides real-time notifications in the terminal about network traffic:
+
+✅ Normal traffic is allowed.
+
+🚨 Suspicious traffic is blocked with a reason tag.
